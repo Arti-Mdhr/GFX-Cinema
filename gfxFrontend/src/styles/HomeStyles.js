@@ -94,7 +94,7 @@ export const TrendingFrame = styled.div`
    flex-direction: column;
    background-color:rgb(0, 0, 0);
    margin-top: 10px;
-   height: 300px;
+   height: 800px;
    width: 100%;
 `;
 
@@ -114,18 +114,6 @@ export const TrendingContent = styled.div`
    background-color:rgb(0, 0, 0);
    overflow-x: auto;
    padding-left: 10px;
-`;
-
-export const TrendingItem = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 150px;
-   cursor: pointer;
-
-   &:hover {
-      transform: scale(1.05);
-   }
 `;
 
 export const TrendingImage = styled.img`
@@ -148,90 +136,47 @@ export const TrendingName = styled.p`
    margin-top: 5px;
    text-align: center;
 `;
-
-/* Recommended Section */
-export const RecommendedFrame = styled.div`
+export const HoverBox = styled.div`
+   position: absolute;
+   top: 100%;
+   left: 50%;
+   transform: translateX(-50%);
+   background-color: rgba(0, 0, 0, 0.9);
+   border-radius: 8px;
+   box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+   padding: 10px;
    display: flex;
    flex-direction: column;
-   height: 340px;
-   width: 100%;
-   background-color:rgb(0, 0, 0);
+   min-width: 140px;
+   z-index: 10;
 `;
 
-export const RecommendIndicate = styled.p`
-   font-size: 24px;
+export const HoverOption = styled.p`
+   font-size: 16px;
    font-family: 'Inconsolata', monospace;
-   font-weight: 600;
+   font-weight: 500;
    color: #f5f5f5;
-   margin-left: 20px;
+   padding: 8px 10px;
+   cursor: pointer;
+   transition: all 0.3s ease-in-out;
+   text-align: center;
+
+   &:hover {
+      background-color: #ffcc00;
+      color: black;
+      border-radius: 4px;
+   }
 `;
 
-export const RecommendContent = styled.div`
-   display: flex;
-   height: 300px;
-   width: 100%;
-   padding-left: 10px;
-   overflow-x: auto;
-`;
-
-export const RecommendItem = styled.div`
+export const TrendingItem = styled.div`
    display: flex;
    flex-direction: column;
    align-items: center;
    width: 150px;
    cursor: pointer;
+   position: relative;  /* To position HoverBox correctly */
 
    &:hover {
       transform: scale(1.05);
-   }
-`;
-
-export const RecommendImage = styled.img`
-   width: 120px;
-   height: 180px;
-   border-radius: 5px;
-   object-fit: cover;
-
-   /* Hide image if src is empty */
-   &:not([src]), &[src=""] {
-      display: none;
-   }
-`;
-
-export const RecommendName = styled.p`
-   font-size: 18px;
-   font-family: 'Inconsolata', monospace;
-   font-weight: 600;
-   color: #d1d1d1;
-   margin-top: 5px;
-   text-align: center;
-`;
-
-/* WebView for Selected Content */
-export const WebViewContainer = styled.div`
-   width: 100%;
-   height: 600px;
-   overflow: hidden;
-   position: relative;
-`;
-
-export const WebViewIframe = styled.iframe`
-   width: 100%;
-   height: 100%;
-   border: none;
-`;
-
-/* Back Button */
-export const BackButton = styled.button`
-   margin-bottom: 10px;
-   padding: 8px 16px;
-   border-radius: 8px;
-   border: none;
-   background-color: #ff4d4d;
-   color: white;
-   cursor: pointer;
-
-   &:hover {
-      background-color: #ff3333;
    }
 `;

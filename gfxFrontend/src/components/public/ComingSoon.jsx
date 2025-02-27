@@ -3,7 +3,7 @@ import {
   MainContainer,
   NavFrame,
   NavItemsFrame,
-  NavFrameRight,
+  NavTitle,
   NavItems,
   ContentFrame,
   LatestContent,
@@ -15,16 +15,25 @@ import {
   LatestWebViewContainer,
   LatestWebViewIframe,
   LatestBackButton
-} from '../../styles/LatestReleasesStyle';
+} from '../../styles/ComingSoonStyle';
 
 
 
 import { Link } from 'react-router-dom';
+import dor from '../../../public/assets/movieImages/dori.png'
+import mic from '../../../public/assets/movieImages/mickey.png'
+import ovr from '../../../public/assets/movieImages/overload.png'
+import pit from '../../../public/assets/movieImages/pitambar.png'
 
-export default function Home() {
+export default function comingSoon() {
   const [selectedUrl, setSelectedUrl] = useState(null);
 
-  const latestItems = [
+   const comingSoon = [
+     { name: "Dori", img: dor, url:"https://www.fcubecinemas.com/show/1554/Feri-Resham-Filili-(U)/"},
+     { name: "Mickey 17", img: mic },
+     { name: "Overload", img: ovr},
+     { name: "Pitambar", img: pit },
+   
     
   ];
 
@@ -32,20 +41,18 @@ export default function Home() {
     <MainContainer>
       {/* Navigation Pane */}
       <NavFrame>
+        <NavTitle>
+          GFX CINEMA
+        </NavTitle>
         <NavItemsFrame>
           <Link to='/home'> <NavItems>Home</NavItems>  </Link>
+          <Link to='//comingSoon'> <NavItems>Coming Soon </NavItems> </Link>
+          <NavItems>Logout</NavItems>
+
           
-          <Link to='/latest'> <NavItems>Latest Releases</NavItems> </Link>
-
-          <Link to='/genre'> <NavItems>Genres</NavItems> </Link>
         </NavItemsFrame>
-        <NavFrameRight>
-          <Link to='/store'> <NavItems>Store</NavItems> </Link>
-          <Link to='/favourites'> <NavItems>Favourites</NavItems> </Link>
-
-          <NavItems>User</NavItems>
-        </NavFrameRight>
       </NavFrame>
+
 
       <ContentFrame>
         {/* If an item is selected, show the WebView (iframe) */}
@@ -57,8 +64,8 @@ export default function Home() {
             
             <LatestWebViewContainer>
               <LatestWebViewIframe 
-                src={""} 
-                title="Manga Viewer"
+                src={selectedUrl} 
+                title="Ticket Viewer"
                 sandbox="allow-scripts allow-same-origin"
               />
             </LatestWebViewContainer>
@@ -67,11 +74,11 @@ export default function Home() {
           <>
             {/* Trending Pane */}
             <LatestFrame>
-              <LatestIndicate>Latest Releases</LatestIndicate>
+              <LatestIndicate>Coming Soon</LatestIndicate>
               <LatestContent>
-                {latestItems.map((item, index) => (
+                {comingSoon.map((item, index) => (
                   <LatestItem key={index} onClick={() => setSelectedUrl(item.url)}>
-                    <LatestImage src={""} alt={item.name} />
+                    <LatestImage src={item.img} alt={item.name} />
                     <LatestName>{item.name}</LatestName>
                   </LatestItem>
                 ))}
