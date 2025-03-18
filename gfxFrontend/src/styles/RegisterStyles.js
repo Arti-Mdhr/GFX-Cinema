@@ -11,10 +11,11 @@ export const Container = styled.div`
 
 export const RegisterBox = styled.div`
   display: flex;
+  flex-direction:column;
   width: 450px;
   height:750px;
   max-width: 90%;
-  background-color: #ffffff;
+  background-color: black;
   border: 2px solid black;
   margin-left:900px
  
@@ -114,4 +115,12 @@ export const ImageContainer = styled.div`
     height: auto;
     object-fit: cover;
   }
+`;
+
+export const LoginRed= styled.p`
+  background-color:black;
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 250px
 `;

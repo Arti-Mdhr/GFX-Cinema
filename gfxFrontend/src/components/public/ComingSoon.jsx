@@ -29,7 +29,7 @@ export default function comingSoon() {
   const [selectedUrl, setSelectedUrl] = useState(null);
 
    const comingSoon = [
-     { name: "Dori", img: dor, url:"https://www.fcubecinemas.com/show/1554/Feri-Resham-Filili-(U)/"},
+     { name: "Dori", img: dor},
      { name: "Mickey 17", img: mic },
      { name: "Overload", img: ovr},
      { name: "Pitambar", img: pit },

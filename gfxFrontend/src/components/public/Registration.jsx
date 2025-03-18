@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import { 
     Container,
     RegisterBox,
@@ -8,61 +9,63 @@ import {
     Form,
     Label,
     Input,
-    RegisterButton
+    RegisterButton,
+    LoginRed
  } from "../../styles/RegisterStyles";
-import logo from '../../../public/assets/images/gfxLogo.png'
 import { registerApi } from "../../apis/api";
 
 export default function RegisterPage () {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    isAdmin: false, // Default to false
-  });
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value.trim(),
-    }));
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { username, email, password } = formData;
-    if (!username || !email || !password) {
-      toast.error("All fields are required!");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      console.log("Submitting Registration Data:", formData);
-      const res = await registerApi(formData);
-
-      if (res.status === 201) {
-        toast.success(res.data.message || "Registration successful!");
-        setTimeout(() => navigate("/"), 1000);
-      } else {
-        toast.error(res.data.message || "Registration failed!");
+    const [formData, setFormData] = useState({
+      username: "",
+      email: "",
+      password: "",
+      isAdmin: false, 
+    });
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+  
+    // Handle input changes
+    const handleChange = (e) => {
+      const { name, value, type, checked } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: type === "checkbox" ? checked : value.trim(),
+      }));
+    };
+  
+    // Handle form submission
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      const { username, email, password } = formData;
+      if (!username || !email || !password) {
+        toast.error("All fields are required!");
+        return;
       }
-    } catch (err) {
-      console.error("Registration error:", err);
-      toast.error(
-        err.response?.data?.message || "Registration failed. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    
+      setLoading(true);
+    
+      try {
+        console.log("Submitting Registration Data:", formData);
+    
+        const res = await registerApi(formData);
+        console.log("Raw API Response:", res); 
+    
+        // ✅ Check res.status from Axios response object, not from res.data
+        if (res.status >= 200 && res.status < 300) {
+          toast.success(res.data?.message || "Registration successful!");
+          setTimeout(() => navigate("/"), 1000);
+        } else {
+          console.error("Unexpected Response:", res);
+          toast.error(res.data?.message || "Registration failed!");
+        }
+      } catch (err) {
+        console.error("Registration error:", err);
+        toast.error(err.response?.data?.message || "Registration failed. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
  
   return (
     <Container>
@@ -108,7 +111,11 @@ export default function RegisterPage () {
               Sign Up
               </RegisterButton>
           </Form>
+
         </FormContainer>
+        <Link to="/">
+          <LoginRed>Back To Login</LoginRed>
+        </Link>
 
       </RegisterBox>
     </Container>
